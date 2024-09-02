@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login de Usuário</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+</head>
+<body>
+    <div class="login">
+        <div class="frame-wrapper">
+            <div class="frame">
+                <div class="text-wrapper-2">Login de Usuário</div>
+                <form method="POST" action="{{ url_for('login') }}" id="login-form">
+                    <div class="text-wrapper">Usuário:</div>
+                    <div class="input-wrapper">
+                        <input type="text" name="username" id="username" class="input-field" placeholder="Digite seu usuário">
+                    </div>
+                
+                    <div class="text-wrapper-4">Senha:</div>
+                    <div class="input-wrapper-2">
+                        <input type="password" name="password" id="password" class="input-field" placeholder="Digite sua senha">
+                    </div>
+                    
+                    <div class="button-wrapper" id="submit-button">
+                        <div class="text-wrapper-3">ACESSAR</div>
+                    </div>
+                </form>
+                <script>
+                    document.getElementById('submit-button').addEventListener('click', function() {
+                        document.getElementById('login-form').submit();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/static/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Eventos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fun.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="table-header">
+            <h2>Lista de Eventos</h2>
+            <div class="add-button" onclick="toggleForm()">Cadastrar um novo Evento</div>
+        </div>
+
+        <div class="form-container" id="form-container">
+            <form action="{{ url_for('inserir_evento') }}" method="POST">
+                <input type="text" name="idEvento" placeholder="ID do Evento" required>
+                <input type="text" name="tipoEvento" placeholder="Tipo de Evento" required>
+                <input type="text" name="dataHora" placeholder="Data e Hora do Evento" required>
+                <input type="text" name="idSalao" placeholder="ID do Salao" required>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>idEvento</th>
+                    <th>tipoEvento</th>
+                    <th>dataHora</th>
+                    <th>idSalao</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in data %}
+                <tr>
+                    <td>{{ evento.idEvento }}</td>
+                    <td>{{ evento.tipoEvento }}</td>
+                    <td>{{ evento.dataHora }}</td>
+                    <td>{{ evento.idSalao }}</td>
+                    <td class="actions">
+                        <a href="javascript:void(0)" class="edit" onclick="openModal('{{ evento.idEvento }}', '{{ evento.tipoEvento }}', '{{ evento.dataHora }}', '{{ evento.idSalao }}')">Editar</a>
+                        <a href="{{ url_for('deletar_evento', idEvento=evento.idEvento) }}" class="remove">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Editar Evento</h2>
+            <form id="editForm" action="{{ url_for('editar_evento', idEvento=0) }}" method="POST">
+                <input type="hidden" name="idEvento" id="editidEvento">
+                <input type="text" name="tipoEvento" id="edittipoEvento" placeholder="Tipo de Evento" required>
+                <input type="text" name="dataHora" id="editdataHora" placeholder="Data e Hora do Evento" required>
+                <input type="text" name="idSalao" id="editidSalao" placeholder="ID do Salao" required>
+                <button type="submit">salvar alterações </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleForm() {
+            var formContainer = document.getElementById("form-container");
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block";
+            } else {
+                formContainer.style.display = "none";
+            }
+    }
+
+    function openModal(idEvento, tipoEvento, dataHora, idSalao) {
+        document.getElementById("editidEvento").value = idEvento;
+        document.getElementById("edittipoEvento").value = tipoEvento;
+        document.getElementById("editdataHora").value = dataHora;
+        document.getElementById("editidSalao").value = idSalao;
+
+        var form = document.getElementById("editForm");
+        form.action = "{{ url_for('editar_evento', idEvento=0) }}" + idEvento;
+
+        var modal = document.getElementById("editModal");
+        modal.style.display = "block";
+    }
+
+
+    function closeModal() {
+        var modal = document.getElementById("editModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("editModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>

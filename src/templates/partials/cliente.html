@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fun.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="table-header">
+            <h2>Lista de Clientes</h2>
+            <div class="add-button" onclick="toggleForm()">Cadastrar novo Cliente</div>
+        </div>
+
+        <div class="form-container" id="form-container">
+            <form action="{{ url_for('inserir_cliente') }}" method="POST"> <!-- BACKEND -->
+                <input type="text" name="idCliente" placeholder="ID do Cliente" required>
+                <input type="text" name="nomeCliente" placeholder="Nome do Cliente" required>
+                <input type="text" name="cpfCliente" placeholder="CPF do Cliente" required>
+                <input type="text" name="emailCliente" placeholder="email do Cliente" required>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in data %}
+                <tr>
+                    <td>{{ cliente.idCliente }}</td>
+                    <td>{{ cliente.cpfCliente }}</td>
+                    <td>{{ cliente.nomeCliente }}</td>
+                    <td>{{ cliente.emailCliente if cliente.emailCliente else 'N/A' }}</td>
+                    <td class="actions">
+                        <a href="javascript:void(0)" class="edit" onclick="openModal('{{ cliente.idCliente }}', '{{ cliente.cpfCliente }}', '{{ cliente.nomeCliente }}', '{{ cliente.emailCliente }}')">Editar</a>
+                        <a href="{{ url_for('deletar_cliente', idCliente=cliente.idCliente) }}" class="remove">Remover</a>
+                    </td>
+                </tr>                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Editar Cliente</h2>
+            <form id="editForm" action="{{ url_for('editar_cliente', idCliente=0) }}" method="POST">
+                <input type="hidden" name="idCliente" id="editidCliente">
+                <input type="text" name="cpfCliente" id="editcpfCliente" placeholder="CPF do Cliente" required>
+                <input type="text" name="nomeCliente" id="editnomeCliente" placeholder="Nome do Cliente" required>
+                <input type="text" name="emailCliente" id="editemailCliente" placeholder="Email do Cliente" required>
+                <button type="submit">salvar alterações </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleForm() {
+            var formContainer = document.getElementById("form-container");
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block";
+            } else {
+                formContainer.style.display = "none";
+            }
+    }
+
+    function openModal(idCliente, cpfCliente, nomeCliente, emailCliente) {
+        document.getElementById("editidCliente").value = idCliente;
+        document.getElementById("editcpfCliente").value = cpfCliente;
+        document.getElementById("editnomeCliente").value = nomeCliente;
+        document.getElementById("editemailCliente").value = emailCliente;
+
+        var form = document.getElementById("editForm");
+        form.action = "{{ url_for('editar_cliente', idCliente=0) }}" + idCliente;
+
+        var modal = document.getElementById("editModal");
+        modal.style.display = "block";
+    }
+
+
+    function closeModal() {
+        var modal = document.getElementById("editModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("editModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Cotratos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fun.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="table-header">
+            <h2>Lista de Contratos</h2>
+            <div class="add-button" onclick="toggleForm()">Cadastrar um novo Contrato</div>
+        </div>
+
+        <div class="form-container" id="form-container">
+            <form action="{{ url_for('inserir_contrato') }}" method="POST">
+                <input type="text" name="idContrato" placeholder="ID do Contrato" required>
+                <input type="text" name="valorEvento" placeholder="Valor do Evento" required>
+                <input type="text" name="qtdPessoa" placeholder="Quantidade de pessoas" required>
+                <input type="text" name="idEvento" placeholder="ID do Evento" required>
+                <input type="text" name="idCliente" placeholder= "ID do Cliente" required>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>idContrato</th>
+                    <th>valorEvento</th>
+                    <th>qtdPessoa</th>
+                    <th>idEvento</th>
+                    <th>idCliente</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contrato in data %}
+                <tr>
+                    <td>{{ contrato.idContrato }}</td>
+                    <td>{{ contrato.valorEvento }}</td>
+                    <td>{{ contrato.qtdPessoa }}</td>
+                    <td>{{ contrato.idEvento }}</td>
+                    <td>{{ contrato.idCliente }}</td>
+                    <td class="actions">
+                        <a href="javascript:void(0)" class="edit" onclick="openModal('{{ contrato.idContrato }}', '{{ contrato.valorEvento }}', '{{ contrato.qtdPessoa }}', '{{ contrato.idEvento }}', '{{ contrato.idCliente  }}')">Editar</a>
+                        <a href="{{ url_for('deletar_contrato', idContrato=contrato.idContrato) }}" class="remove">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Editar Contrato</h2>
+            <form id="editForm" action="{{ url_for('editar_contrato', idContrato=0) }}" method="POST">
+                <input type="hidden" name="idContrato" id="editidContrato">
+                <input type="text" name="valorEvento" id="editvalorEvento" placeholder="Valor do Evento" required>
+                <input type="text" name="qtdPessoa" id="editqtdPessoa" placeholder="Quantidade de pessoas" required>
+                <input type="text" name="idEvento" id="editidEvento" placeholder="ID do Evento" required>
+                <input type="text" name="idCliente" id="editidCliente" placeholder="ID do Cliente" required>
+                <button type="submit">salvar alterações </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleForm() {
+            var formContainer = document.getElementById("form-container");
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block";
+            } else {
+                formContainer.style.display = "none";
+            }
+    }
+
+    function openModal(idContrato, valorEvento, qtdPessoa, idEvento, idCliente) {
+        document.getElementById("editidContrato").value = idContrato;
+        document.getElementById("editvalorEvento").value = valorEvento;
+        document.getElementById("editqtdPessoa").value = qtdPessoa;
+        document.getElementById("editidEvento").value = idEvento;
+        document.getElementById("editidCliente").value = idCliente;
+
+        var form = document.getElementById("editForm");
+        form.action = "{{ url_for('editar_contrato', idContrato=0) }}" + idContrato;
+
+        var modal = document.getElementById("editModal");
+        modal.style.display = "block";
+    }
+
+
+    function closeModal() {
+        var modal = document.getElementById("editModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("editModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>
