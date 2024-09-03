@@ -174,3 +174,59 @@ tr:nth-child(odd) {
 .modal button:hover {
     background-color: #247792;
 }
+
+/* Estilo para o container do botão de logout */
+.logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* Estilo para o botão de logout */
+.logout-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+}
+
+.logout-button:hover {
+    background-color: #ff3333;
+}
+
+
+/* Estilo para o container do botão de return */
+.return-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+
+/* Estilo para o botão de return */
+.return-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+}
+
+.return-button:hover {
+    background-color: #09e426;
+}

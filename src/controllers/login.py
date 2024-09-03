@@ -31,5 +31,10 @@ class AutenticaUsuario:
                 flash('Nome de usuário ou senha incorretos.')
         return render_template('/public/login.html')
 
+    def logout(self):
+        session.pop('user', None)
+        return redirect(url_for('login'))
+
+
     def __del__(self):
         self.connection.close()

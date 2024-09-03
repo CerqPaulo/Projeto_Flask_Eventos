@@ -12,6 +12,7 @@ app.config.from_mapping(
 def index():
     return redirect(url_for('login'))
 
+
 rotas_protegidas = ['/principal', '/funcionarios', '/clientes', '/contratos', '/eventos']
 
 @app.before_request
@@ -25,6 +26,11 @@ fazlogin = AutenticaUsuario()
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     return fazlogin.login()
+
+@app.route('/logout')
+def logout():
+    return fazlogin.logout()
+
 
 @app.route('/principal')
 def principal():
