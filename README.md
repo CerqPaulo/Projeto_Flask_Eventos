@@ -21,9 +21,4 @@ services:
       - 3306:3306
     volumes:
       - ./dados_mysql:/var/lib/mysql:rw
-
-
-
-
-
-
+'''
