@@ -23,9 +23,10 @@ services:
       - ./dados_mysql:/var/lib/mysql:rw
 
 
+
 ### Ativando o serviço
 
 ```bash
 docker-compose up -d
-```
+
 
