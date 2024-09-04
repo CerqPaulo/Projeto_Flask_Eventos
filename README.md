@@ -24,9 +24,6 @@ services:
 
 
 
-### Ativando o serviço
 
-```bash
-docker-compose up -d
 
 
