@@ -12,6 +12,11 @@ O Projeto foi todo "Dockerizado", na branch 'master' o projeto estar modificado 
 - Ter o `git` instalado para clonar o repositório.
 - Ter o Mysql WorkBench na maquina ou usar o PhpAdmin.
 
+Antes de executar os comandos, o codigo deve ser modificado quando as credenciais
+do usuario do banco de dados, na pasta controllers estar as conexões com o banco 
+de dados, basta trocar o user e password ou criar um novo usuario no Mysql com as 
+mesmas credenciais
+
 ## Para rodar o projeto sem o Docker basta executar os seguintes comandos
 
 1. **Clone o repositório**:
