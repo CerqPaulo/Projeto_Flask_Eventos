@@ -4,21 +4,4 @@ Desenvolvi uma aplicação web capaz de gerenciar dados relevantes de uma empres
 
 O **Back-End** foi desenvolvido usando **Flask**, o **Front-End** foi feito com **HTML**, **CSS**, e **JavaScript**, e o banco de dados utilizado foi o **MySQL**.
 
-## Rodar o MySQL no Docker
-
-```yaml
-version: '3'
-
-services:
-  mysql:
-    image: mysql:8
-    container_name: mysql_eventos
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: EVENTOS
-    ports:
-      - 3306:3306
-    volumes:
-      - ./dados_mysql:/var/lib/mysql:rw
-'''
+## Para rodar o rodar o projeto basta executar os seguintes comandos
