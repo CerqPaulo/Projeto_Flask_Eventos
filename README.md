@@ -7,19 +7,18 @@ O **Back-End** foi desenvolvido usando **Flask**, o **Front-End** foi feito com 
 ## Para rodar o rodar o projeto basta executar os seguintes comandos
 
 
-<div style="position: relative; display: inline-block;">
-  <textarea id="codeBox" style="width: 100%; padding: 10px;" readonly>
-# Seu código ou texto aqui
-print("Olá, mundo!")
-  </textarea>
-  <button onclick="copyText()" style="position: absolute; top: 0; right: 0; padding: 5px;">📋 Copiar</button>
-</div>
+# Tutorial para Rodar o Projeto
 
-<script>
-function copyText() {
-  var copyText = document.getElementById("codeBox");
-  copyText.select();
-  document.execCommand("copy");
-  alert("Texto copiado!");
-}
-</script>
+Este é um guia rápido para executar os comandos necessários para rodar o projeto.
+
+## Pré-requisitos
+
+- Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
+- Ter o `git` instalado para clonar o repositório.
+
+## Passos para Executar o Projeto
+
+1. **Clone o repositório**:
+
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
