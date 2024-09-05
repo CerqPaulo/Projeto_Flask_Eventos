@@ -4,21 +4,26 @@ Desenvolvi uma aplicação web capaz de gerenciar dados relevantes de uma empres
 
 O **Back-End** foi desenvolvido usando **Flask**, o **Front-End** foi feito com **HTML**, **CSS**, e **JavaScript**, e o banco de dados utilizado foi o **MySQL**.
 
-## Para rodar o rodar o projeto basta executar os seguintes comandos
-
-
-# Tutorial para Rodar o Projeto
-
-Este é um guia rápido para executar os comandos necessários para rodar o projeto.
+## Para rodar o projeto sem o Docker basta executar os seguintes comandos
 
 ## Pré-requisitos
 
-- Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
+- Ter o Pyhon instalado na maquina
 - Ter o `git` instalado para clonar o repositório.
-
-## Passos para Executar o Projeto
+- Ter o Mysql WorkBench na maquina ou usar o PhpAdmin.
 
 1. **Clone o repositório**:
 
    ```bash
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+
+2. **Instalar todas as dependência**:
+   ```bash
+   pip install -r requirements.txt
+
+3. **Executar o arquivo principal**:
+
+   ```bash
+   python main.py
+
+
