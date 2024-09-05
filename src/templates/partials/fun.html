@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Funcionários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fun.css') }}">
+</head>
+<body>
+
+    <!-- Container para o botão de logout -->
+    <div class="logout-container">
+        <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
+    </div>
+
+    <!-- Container para o botão de retornar -->
+    <div class="return-container">
+        <button class="return-button" onclick="window.location.href='/principal'">Voltar</button>
+    </div>
+
+    <div class="container">
+        <div class="table-header">
+            <h2>Lista de Funcionários</h2>
+            <div class="add-button" onclick="toggleForm()">Cadastrar novo funcionário</div>
+        </div>
+
+        <div class="form-container" id="form-container">
+            <form action="{{ url_for('inserir_funcionario') }}" method="POST">
+                <input type="text" name="idFuncionario" placeholder="ID do Funcionário" required>
+                <input type="text" name="nomeFuncionario" placeholder="Nome do Funcionário" required>
+                <input type="text" name="cpfFuncionario" placeholder="CPF do Funcionário" required>
+                <input type="text" name="cargo" placeholder="Cargo do Funcionário" required>
+                <input type="text" name="salarioMensal" placeholder="Remuneração do Funcionário" required>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>salario Mensal</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for funcionario in data %}
+                <tr>
+                    <td>{{ funcionario.idFuncionario }}</td>
+                    <td>{{ funcionario.cpfFuncionario }}</td>
+                    <td>{{ funcionario.nomeFuncionario }}</td>
+                    <td>{{ funcionario.cargo }}</td>
+                    <td>{{ funcionario.salarioMensal }}</td>
+                    <td class="actions">
+                        <a href="javascript:void(0)" class="edit" onclick="openModal('{{ funcionario.idFuncionario }}', '{{ funcionario.cpfFuncionario }}', '{{ funcionario.nomeFuncionario }}', '{{ funcionario.cargo }}', '{{ funcionario.salarioMensal }}')">Editar</a>
+                        <a href="{{ url_for('deletar_funcionario', idFuncionario=funcionario.idFuncionario) }}" class="remove">Remover</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Editar Funcionário</h2>
+            <form id="editForm" action="{{ url_for('editar_funcionario', idFuncionario=0) }}" method="POST">
+                <input type="hidden" name="idFuncionario" id="editidFuncionario">
+                <input type="text" name="cpfFuncionario" id="editcpfFuncionario" placeholder="CPF do Funcionário" required>
+                <input type="text" name="nomeFuncionario" id="editnomeFuncionario" placeholder="Nome do Funcionário" required>
+                <input type="text" name="cargo " id ="editcargo" placeholder="Cargo do Funcionário" required>
+                <input type="text" name="salarioMensal" id="editsalarioMensal" placeholder="Remuneração do Funcionário" required>
+                <button type="submit">salvar alterações </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function toggleForm() {
+            var formContainer = document.getElementById("form-container");
+            if (formContainer.style.display === "none" || formContainer.style.display === "") {
+                formContainer.style.display = "block";
+            } else {
+                formContainer.style.display = "none";
+            }
+    }
+
+    function openModal(idFuncionario, cpfFuncionario, nomeFuncionario, cargo, salarioMensal) {
+        document.getElementById("editidFuncionario").value = idFuncionario;
+        document.getElementById("editcpfFuncionario").value = cpfFuncionario;
+        document.getElementById("editnomeFuncionario").value = nomeFuncionario;
+        document.getElementById("editcargo").value = cargo;
+        document.getElementById("editsalarioMensal").value = salarioMensal;
+
+        var form = document.getElementById("editForm");
+        form.action = "{{ url_for('editar_funcionario', idFuncionario=0) }}" + idFuncionario;
+
+        var modal = document.getElementById("editModal");
+        modal.style.display = "block";
+    }
+
+
+    function closeModal() {
+        var modal = document.getElementById("editModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("editModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+</body>
+</html>

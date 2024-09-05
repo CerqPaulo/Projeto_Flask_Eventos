@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_eventos
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: EVENTOS
+    ports:
+      - 3306:3306
+    volumes:
+      - ./dados_mysql:/var/lib/mysql:rw
+      - ./scripts_sql:/docker-entrypoint-initdb.d
+
+  flask:
+    build: .
+    container_name: flask_app
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    command: >
+      bash -c "while ! nc -z mysql_eventos 3306;
+               do echo 'Waiting for MySQL...';
+               sleep 3;
+               done;
+               python main.py"

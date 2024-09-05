@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>Principal</title>
+</head>
+<body>
+    <!-- Container para o botão de logout -->
+    <div class="logout-container">
+        <button class="logout-button" onclick="window.location.href='/logout'">Logout</button>
+    </div>
+
+    <div class="principal">
+        <p class="p">Escolha uma sessão para gerenciar</p>
+        <button class="frame" onclick="window.location.href='/eventos'">Gerenciar Eventos</button>
+        <button class="frame-3" onclick="window.location.href='/clientes'">Gerenciar Clientes</button>
+        <button class="frame-2" onclick="window.location.href='/funcionarios'">Gerenciar Funcionários</button>
+        <button class="div-wrapper" onclick="window.location.href='/contratos'">Gerenciar Contratos</button>
+    </div>
+</body>
+</html>
