@@ -4,6 +4,7 @@ Desenvolvi uma aplicação web capaz de gerenciar dados relevantes de uma empres
 
 O **Back-End** foi desenvolvido usando **Flask**, o **Front-End** foi feito com **HTML**, **CSS**, e **JavaScript**, e o banco de dados utilizado foi o **MySQL**.
 
+O Projeto foi todo "Dockerizado", na branch 'master' o projeto estar modificado para rodar com o Docker
 
 ## Pré-requisitos
 
