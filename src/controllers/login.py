@@ -24,17 +24,14 @@ class AutenticaUsuario:
                 flash('Nome de usuário ou senha incorretos.')
         return render_template('/public/login.html')
 
+    
     def authenticate(self, username, password):
-        try:
-            query = "SELECT * FROM USUARIO WHERE nomeUsuario = %s"
-            self.cursor.execute(query, (username,))
-            user = self.cursor.fetchone()
-            if user and user['senhaUsuario'] == password:
-                return True
-            return False
-        finally:
-            self.cursor.close()
-            self.connection.close()
+        query = "SELECT * FROM USUARIO WHERE nomeUsuario = %s"
+        self.cursor.execute(query, (username,))
+        user = self.cursor.fetchone()
+        if user and user['senhaUsuario'] == password:
+            return True
+        return False
 
 
     def logout(self):
