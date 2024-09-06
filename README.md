@@ -31,7 +31,7 @@
    ```bash
    python -c "import pymysql; pymysql.connect(host='mysql_eventos', user='root', password='root', db='EVENTOS')"
 
+6. **Executar o programa principal**:
 
-
-   
-   docker compose up -d
+   ```bash
+   python -c "import pymysql; pymysql.connect(host='mysql_eventos', user='root', password='root', db='EVENTOS')"
