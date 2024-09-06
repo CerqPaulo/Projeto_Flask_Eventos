@@ -31,7 +31,7 @@
    ```bash
    python -c "import pymysql; pymysql.connect(host='mysql_eventos', user='root', password='root', db='EVENTOS')"
 
-6. **Executar o programa principal**:
+6. **Abra um novo terminal e execute o programa principal**:
 
    ```bash
-   python -c "import pymysql; pymysql.connect(host='mysql_eventos', user='root', password='root', db='EVENTOS')"
+   python main.py
